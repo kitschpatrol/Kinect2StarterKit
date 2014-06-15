@@ -1,0 +1,6 @@
+[submodule "openFrameworks"]
+	path = openFrameworks
+	url = https://github.com/liquidzym/openFrameworks.git
+[submodule "openTSPS"]
+	path = openTSPS
+	url = https://github.com/kitschpatrol/openTSPS.git
