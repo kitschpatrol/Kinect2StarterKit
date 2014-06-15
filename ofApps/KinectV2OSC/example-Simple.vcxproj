@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7FD42DF7-442E-479A-BA76-D0022F99702A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>emptyExample</RootNamespace>
+    <ProjectName>KinectV2OSC</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\openFrameworks\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\openFrameworks\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_debug</TargetName>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+    <IncludePath>$(KINECTSDK20_DIR)inc;$(KINECT_TOOLKIT_DIR)inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(KINECTSDK20_DIR)\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(KINECTSDK20_DIR)inc;$(KINECT_TOOLKIT_DIR)inc;$(IncludePath)</IncludePath>
+    <LibraryPath>$(KINECTSDK20_DIR)\lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <MinimalRebuild>false</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>src;..\..\ofAddons\ofxKinectV2\src;..\..\ofAddons\ofxKinectV2\libs\KCBv2\include;C:\Program Files\Microsoft SDKs\Kinect\v2.0-DevPreview1404\inc;..\..\openFrameworks\libs\openFrameworks;..\..\openFrameworks\libs\openFrameworks\graphics;..\..\openFrameworks\libs\openFrameworks\app;..\..\openFrameworks\libs\openFrameworks\sound;..\..\openFrameworks\libs\openFrameworks\utils;..\..\openFrameworks\libs\openFrameworks\communication;..\..\openFrameworks\libs\openFrameworks\video;..\..\openFrameworks\libs\openFrameworks\types;..\..\openFrameworks\libs\openFrameworks\math;..\..\openFrameworks\libs\openFrameworks\3d;..\..\openFrameworks\libs\openFrameworks\gl;..\..\openFrameworks\libs\openFrameworks\events;..\..\openFrameworks\libs\glut\include;..\..\openFrameworks\libs\rtAudio\include;..\..\openFrameworks\libs\quicktime\include;..\..\openFrameworks\libs\freetype\include;..\..\openFrameworks\libs\freetype\include\freetype2;..\..\openFrameworks\libs\freeImage\include;..\..\openFrameworks\libs\fmodex\include;..\..\openFrameworks\libs\videoInput\include;..\..\openFrameworks\libs\glew\include\;..\..\openFrameworks\libs\glu\include;..\..\openFrameworks\libs\tess2\include;..\..\openFrameworks\libs\cairo\include\cairo;..\..\openFrameworks\libs\glfw\include;..\..\openFrameworks\libs\openssl\include;..\..\openFrameworks\addons;..\..\openFrameworks\addons\ofxOsc\src;..\..\openFrameworks\addons\ofxOsc\libs;..\..\openFrameworks\addons\ofxOsc\libs\oscpack;..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src;..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip;..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc;..\..\openFrameworks\libs\poco\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies);KCBv2.lib;Kinect20.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ofAddons\ofxKinectV2\libs\KCBv2\lib\x86;C:\Program Files\Microsoft SDKs\Kinect\v2.0-DevPreview1404\lib\x86;..\..\openFrameworks\libs\glut\lib\vs;..\..\openFrameworks\libs\rtAudio\lib\vs;..\..\openFrameworks\libs\tess2\lib\vs;..\..\openFrameworks\libs\Poco\lib\vs;..\..\openFrameworks\libs\openssl\lib\vs;..\..\openFrameworks\libs\glu\lib\vs;..\..\openFrameworks\libs\glew\lib\vs;..\..\openFrameworks\libs\cairo\lib\vs;..\..\openFrameworks\libs\videoInput\lib\vs;..\..\openFrameworks\libs\fmodex\lib\vs;..\..\openFrameworks\libs\quicktime\lib\vs;..\..\openFrameworks\libs\freetype\lib\vs;..\..\openFrameworks\libs\FreeImage\lib\vs;..\..\openFrameworks\libs\glfw\lib\vs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /e /i /y "$(ProjectDir)..\..\openFrameworks\export\vs\*.dll" "$(ProjectDir)bin"
+xcopy /e /i /y "$(ProjectDir)..\..\ofAddons\ofxKinectV2\libs\KCBv2\lib\x86\*.dll" "$(ProjectDir)bin"
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>src;..\..\openFrameworks\addons\ofxKinect4Windows\src;..\..\openFrameworks\addons\ofxKinect4Windows\libs\KinectCommonBridge\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <Link>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies);KinectCommonBridge.lib;Kinect10.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\openFrameworks\addons\ofxKinectCommonBridge\libs\KinectCommonBridge\lib\windows;..\..\openFrameworks\libs\glut\lib\vs;..\..\openFrameworks\libs\glfw\lib\vs;..\..\openFrameworks\libs\rtAudio\lib\vs;..\..\openFrameworks\libs\FreeImage\lib\vs;..\..\openFrameworks\libs\freetype\lib\vs;..\..\openFrameworks\libs\quicktime\lib\vs;..\..\openFrameworks\libs\fmodex\lib\vs;..\..\openFrameworks\libs\videoInput\lib\vs;..\..\openFrameworks\libs\cairo\lib\vs;..\..\openFrameworks\libs\glew\lib\vs;..\..\openFrameworks\libs\glu\lib\vs;..\..\openFrameworks\libs\openssl\lib\vs;..\..\openFrameworks\libs\Poco\lib\vs;..\..\openFrameworks\libs\tess2\lib\vs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /e /i /y "$(ProjectDir)..\..\openFrameworks\export\vs\*.dll" "$(ProjectDir)bin"
+xcopy /e /i /y "$(ProjectDir)..\libs\KinectCommonBridge\lib\windows\x86\*.dll" "$(ProjectDir)bin"
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\ofAddons\ofxKinectV2\src\ofxKinectCommonBridge.cpp" />
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.cpp" />
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\posix\UdpSocket.cpp" />
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\win32\NetworkingUtilsWin.cpp" />
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\win32\UdpSocketWin.cpp" />
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.cpp" />
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.cpp" />
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.cpp" />
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp" />
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscBundle.cpp" />
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscMessage.cpp" />
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscParameterSync.cpp" />
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscReceiver.cpp" />
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscSender.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\testApp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\ofAddons\ofxKinectV2\libs\KCBv2\include\KCBv2Lib.h" />
+    <ClInclude Include="..\..\ofAddons\ofxKinectV2\src\ofxKinectCommonBridge.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\NetworkingUtils.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\PacketListener.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\TimerListener.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\UdpSocket.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\MessageMappingOscPacketListener.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscException.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscHostEndianness.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscPacketListener.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOsc.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscArg.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscBundle.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscMessage.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscParameterSync.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscReceiver.h" />
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscSender.h" />
+    <ClInclude Include="src\testApp.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\openFrameworks\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
+      <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

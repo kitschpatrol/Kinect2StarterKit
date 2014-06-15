@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\testApp.cpp" />
+    <ClCompile Include="..\..\ofAddons\ofxKinectV2\src\ofxKinectCommonBridge.cpp">
+      <Filter>ofxKinectV2</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.cpp">
+      <Filter>ofxOsc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscBundle.cpp">
+      <Filter>ofxOsc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscMessage.cpp">
+      <Filter>ofxOsc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscParameterSync.cpp">
+      <Filter>ofxOsc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscReceiver.cpp">
+      <Filter>ofxOsc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscSender.cpp">
+      <Filter>ofxOsc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.cpp">
+      <Filter>ofxOsc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.cpp">
+      <Filter>ofxOsc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.cpp">
+      <Filter>ofxOsc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.cpp">
+      <Filter>ofxOsc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\posix\UdpSocket.cpp">
+      <Filter>ofxOsc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\win32\UdpSocketWin.cpp">
+      <Filter>ofxOsc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\win32\NetworkingUtilsWin.cpp">
+      <Filter>ofxOsc</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\testApp.h" />
+    <ClInclude Include="..\..\ofAddons\ofxKinectV2\src\ofxKinectCommonBridge.h">
+      <Filter>ofxKinectV2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\ofAddons\ofxKinectV2\libs\KCBv2\include\KCBv2Lib.h">
+      <Filter>ofxKinectV2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\IpEndpointName.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\MessageMappingOscPacketListener.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOsc.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscArg.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscBundle.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscMessage.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscParameterSync.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscReceiver.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\src\ofxOscSender.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscException.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscHostEndianness.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscOutboundPacketStream.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscPacketListener.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscPrintReceivedElements.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscReceivedElements.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc\OscTypes.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\PacketListener.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\TimerListener.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\UdpSocket.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\NetworkingUtils.h">
+      <Filter>ofxOsc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ofxKinectV2">
+      <UniqueIdentifier>{92762ac0-daf7-4961-a079-b95b04e6e3a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ofxOsc">
+      <UniqueIdentifier>{44bd5d0d-2624-40a6-886f-4903dc688f52}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
