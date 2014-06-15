@@ -1,6 +1,7 @@
 [submodule "openFrameworks"]
 	path = openFrameworks
 	url = https://github.com/liquidzym/openFrameworks.git
+	branch = VS2013
 [submodule "ofAddons/ofxKinectV2"]
 	path = ofAddons/ofxKinectV2
 	url = https://github.com/kitschpatrol/ofxKinectV2.git
