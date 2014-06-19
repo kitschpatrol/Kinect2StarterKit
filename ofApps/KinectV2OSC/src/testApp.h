@@ -2,6 +2,9 @@
 
 #include "ofMain.h"
 #include "ofxKinectCommonBridge.h"
+#include "ofxOsc.h"
+
+
 
 class testApp : public ofBaseApp{
 	public:
@@ -22,4 +25,6 @@ class testApp : public ofBaseApp{
 		ofxKinectCommonBridge kinect;
 		ofShader yuvRGBShader;
 		ofPlanePrimitive plane;
+
+		ofxOscSender sender;
 };

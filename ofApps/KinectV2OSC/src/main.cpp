@@ -3,11 +3,15 @@
 
 #include "ofGLProgrammableRenderer.h"
 
+
+#define VM_DEVELOPMENT 1
+
 //========================================================================
 int main( ){
-
-	ofPtr<ofBaseRenderer> renderer(new ofGLProgrammableRenderer(true));
-	ofSetCurrentRenderer(renderer);
+	//#if VM_DEVELOPMENT
+	//ofPtr<ofBaseRenderer> renderer(new ofGLProgrammableRenderer(true));
+	//ofSetCurrentRenderer(renderer);
+	//#endif
 
 	ofSetupOpenGL(1920,1080, OF_WINDOW);			// <-------- setup the GL context
 
