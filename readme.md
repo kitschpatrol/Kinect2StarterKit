@@ -16,7 +16,7 @@
 
 5. Get the repository and submodules. openFrameworks is included This might take a very long time:
 
-		git clone --recursive git@github.com:kitschpatrol/Kinect2StarterKit.git`
+		git clone --recursive git@github.com:kitschpatrol/Kinect2StarterKit.git
 		
 6. Plug in the Kinect and try the example included in ofxKinectV2 to make sure everything works. `\Kinect2StarterKit\ofAddons\ofxKinectV2\example-Simple\example-Simple.sln`		
 
