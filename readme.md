@@ -1,152 +1,60 @@
 #Kinect 2 Starter Kit
 
-<img src="data:image/png;base64,R0lGODlh2AASAMcAAP8YAP8hAP8pAP8xAP85AP9CAP9KAP9SAP9aAP9jAP9rAP9z
-AP97AP+EAP+MAP+UAP+cAP+lAP+tAP+1AP+9AP/GAP/OAP/WAP/eAP/nAP/vAP//
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
-/////////////////yH/C05FVFNDQVBFMi4wAwEQJwAh+QQJDwAbACwAAAAA2AAS
-AAcI/AA3CBy4AYBBggYBDEyoUGDChQwPIoz4EGJEghgzFqyYkSFGjw4lfvRIEWTJ
-jiI3NpwosSRHjihTqlwJM6RIkDMtzqTIkufOixpHArVYEydMl0iTpjR6VKlPnD1l
-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
-BwACAA0AAAAAAAAAAAAHYTAuZ2lmAAA7"/>
+**This kit aligns various stars for your convenience. It aggregates the dependencies and patches required to get the Kinect 2 sensor running in openFrameworks.**
+
+
+
+###Getting Started
+
+1. Install Windows 8.1 (Boot Camp is fine if your Mac is endowed with USB 3. Virtual machines won't work.)
+
+2. Install Visual Studio 2013.
+
+3. Download and install [Git](http://git-scm.com/download/win). Say "no" to the fancy git-cheetah shell extension! It doesn't work correctly on Windows 8.
+
+4. Install the [Kinect For Windows V2 SDK](http://www.microsoft.com/en-us/kinectforwindows/Purchase/developer-sku.aspx). This should be publicly available in July.
+
+5. Get the repository and submodules. openFrameworks is included This might take a very long time:
+
+		git clone --recursive git@github.com:kitschpatrol/Kinect2StarterKit.git`
+		
+6. Plug in the Kinect and try the example included in ofxKinectV2 to make sure everything works. `\Kinect2StarterKit\ofAddons\ofxKinectV2\example-Simple\example-Simple.sln`		
+
+###Hardware Requirements
+
+- A Windows 8.1 PC or a (very) recent mac running Windows 8.1 via Bootcamp
+
+- The [Kinect For Windows V2 Sensor](http://www.microsoft.com/en-us/kinectforwindows/Purchase/developer-sku.aspx) (This won't work with the Kinect bundled with your Xbox One.)
+
+- A USB 3.0 port (Currently only USB host controllers based on Reneasas or Intel chipsets are supported. I've had luck with [this Reneasas-based SIIG PCI card](http://www.bhphotovideo.com/c/product/968543-REG/siig_ju_p40311_s1_dp_4_port_usb_3_0.html) in combination with the alpha Kinect 2 hardware.
+
+
+###Project Goals
+
+This project has two use cases in mind:
+
+#####A shortcut to Windows-Native development
+Simplify configuration for developing Windows-only openFrameworks applications that run natively and have full access to the Kinect 2's API. Help developers get up and running very quickly without having to align various repos. (Potentially helpful for workshops, classes, hackathons, etc.)
+
+
+#####A no-fuss bridge to other platforms
+Provide access to a subset of the Kinect 2's functionality for any OSC-compatible platform. In this case, skeleton data from the Kinect is streamed over the network via an instance of the starter kit running on a Windows machine. Since a wide-range of platforms can consume OSC, this should make it easier to work with the Kinect 2 on a Mac or mobile device.
+
+I'd eventually like to merge this functionality into a more evolved and generic project like [openTSPS](https://github.com/labatrockwell/openTSPS).
+
+A very simple OSC broadcaster with partial coverage of the Kinect 2 API is under development here: `\Kinect2StarterKit\ofApps\KinectV2OSC\KinectV2OSC.sln`
+
+
+###Repository Structure
+
+This repository uses a structure that might be unfamiliar to openFrameworks users. Due to the specificity of the various dependencies, both openFrameworks and the relevant addons are embedded as git submodules.
+
+To avoid issues with nesting files that belong in the parent repository inside submodules, examples and addons are stored *outside* the root `/openFrameworks` directory. Paths and linkages have been updated accordingly, but if you try to drag one of the projects in `/ofApps` or `/ofAddons` into their usual locations inside the `/openFrameworks` directory, they will break.
+
+
+###Credit
+
+This repository just glues together a bunch of other people's great work.
+
+- [liquidzym](https://github.com/liquidzym) added VS2013 compatibility to OF
+- [Joshua Noble](https://github.com/joshuajnoble) wrote the KinectV2 plugin
