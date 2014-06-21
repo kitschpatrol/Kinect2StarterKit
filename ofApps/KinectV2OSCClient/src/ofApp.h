@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "ofxOsc.h"
+#include "KinectTypes.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -21,4 +23,8 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 		ofxOscReceiver oscReceiver;		
+		vector<Kv2Skeleton> skeletons;
+private:
+	int messagesReceived;
 };
+

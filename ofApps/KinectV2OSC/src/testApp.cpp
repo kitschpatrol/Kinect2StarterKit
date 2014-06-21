@@ -5,7 +5,7 @@
 void testApp::setup(){
 
 	ofSetLogLevel(OF_LOG_VERBOSE);
-
+	messagesSent = 0;
 #if VM_DEVELOPMENT
 	kinect.initSensor();
 	kinect.initColorStream(false);
@@ -20,7 +20,9 @@ void testApp::setup(){
 	ofDisableAlphaBlending(); //Kinect alpha channel is default 0;
 
 	//sender.setup("192.168.10.113", 12345);
-	sender.setup("192.168.10.101", 3001);
+	//sender.setup("192.168.10.101", 3001);
+	sender.setup("127.0.0.1", 3001);
+
 }
 
 
@@ -70,6 +72,7 @@ void testApp::update() {
 		// Interate through skeletons
 		ofxOscBundle skeletonsBundle; // note the plural!
 
+		// Bundles just seem to be structural... to the receiver, they remain separate messages
 		vector<Kv2Skeleton> localSkeletons = kinect.getSkeletons();
 
 		for (int i = 0; i < localSkeletons.size(); i++) {
@@ -93,6 +96,7 @@ void testApp::update() {
 					jointPositionMessage.addFloatArg(joint.getPosition().y);
 					jointPositionMessage.addFloatArg(joint.getPosition().z);
 					skeletonBundle.addMessage(jointPositionMessage);
+					messagesSent++;
 
 					ofxOscMessage jointOrientationMessage;
 					jointOrientationMessage.setAddress("/skeletons/" + ofToString(i) + "/joints/" + jointNames[jointType] + "/orientation"); // quaternion is X Y Z W
@@ -101,6 +105,7 @@ void testApp::update() {
 					jointOrientationMessage.addFloatArg(joint.getOrientation().asVec4().z);
 					jointOrientationMessage.addFloatArg(joint.getOrientation().asVec4().w);
 					skeletonBundle.addMessage(jointOrientationMessage);
+					messagesSent++;
 
 					//ofxOscMessage jointTrackingStateMessage;
 					//jointTrackingStateMessage.setAddress("/skeletons/" + ofToString(i) + "/joints/" + jointNames[jointType] + "/tracking"); // string state
@@ -112,9 +117,13 @@ void testApp::update() {
 			}
 		}
 
+
 		sender.sendBundle(skeletonsBundle);
 	}
 #endif		
+
+	ofLog(OF_LOG_VERBOSE, "messages sent: " + ofToString(messagesSent));
+
 }
 
 //--------------------------------------------------------------
@@ -140,6 +149,7 @@ void testApp::keyPressed(int key){
 		m.addStringArg("hello");
 		m.addFloatArg(ofGetElapsedTimef());
 		sender.sendMessage(m);
+		messagesSent++;
 	}
 }
 
@@ -181,4 +191,10 @@ void testApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+
+void testApp::exit(){
+	ofLog(OF_LOG_VERBOSE, "Exiting App");
+	kinect.stop();
 }

@@ -21,10 +21,12 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-
+		void exit();
 		ofxKinectCommonBridge kinect;
 		ofShader yuvRGBShader;
 		ofPlanePrimitive plane;
 
 		ofxOscSender sender;
+private:
+	int messagesSent;
 };
