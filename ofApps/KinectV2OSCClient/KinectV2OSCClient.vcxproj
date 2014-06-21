@@ -77,7 +77,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\openFrameworks\addons\ofxOsc\libs;..\..\openFrameworks\addons\ofxOsc\src;..\..\openFrameworks\addons\ofxOsc\libs\oscpack;..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src;..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip;..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\posix;..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip\win32;..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;..\..\openFrameworks\libs\openFrameworks;..\..\openFrameworks\libs\openFrameworks\graphics;..\..\openFrameworks\libs\openFrameworks\app;..\..\openFrameworks\libs\openFrameworks\sound;..\..\openFrameworks\libs\openFrameworks\utils;..\..\openFrameworks\libs\openFrameworks\communication;..\..\openFrameworks\libs\openFrameworks\video;..\..\openFrameworks\libs\openFrameworks\types;..\..\openFrameworks\libs\openFrameworks\math;..\..\openFrameworks\libs\openFrameworks\3d;..\..\openFrameworks\libs\openFrameworks\gl;..\..\openFrameworks\libs\openFrameworks\events;..\..\openFrameworks\libs\glut\include;..\..\openFrameworks\libs\rtAudio\include;..\..\openFrameworks\libs\quicktime\include;..\..\openFrameworks\libs\freetype\include;..\..\openFrameworks\libs\freetype\include\freetype2;..\..\openFrameworks\libs\freeImage\include;..\..\openFrameworks\libs\fmodex\include;..\..\openFrameworks\libs\videoInput\include;..\..\openFrameworks\libs\glew\include\;..\..\openFrameworks\libs\glu\include;..\..\openFrameworks\libs\tess2\include;..\..\openFrameworks\libs\cairo\include\cairo;..\..\openFrameworks\libs\glfw\include;..\..\openFrameworks\libs\openssl\include;..\..\openFrameworks\addons;..\..\openFrameworks\addons\ofxOsc\src;..\..\openFrameworks\addons\ofxOsc\libs;..\..\openFrameworks\addons\ofxOsc\libs\oscpack;..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src;..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\ip;..\..\openFrameworks\addons\ofxOsc\libs\oscpack\src\osc;..\..\openFrameworks\libs\poco\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -88,8 +88,11 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\openFrameworks\libs\glut\lib\vs;..\..\openFrameworks\libs\rtAudio\lib\vs;..\..\openFrameworks\libs\tess2\lib\vs;..\..\openFrameworks\libs\Poco\lib\vs;..\..\openFrameworks\libs\openssl\lib\vs;..\..\openFrameworks\libs\glu\lib\vs;..\..\openFrameworks\libs\glew\lib\vs;..\..\openFrameworks\libs\cairo\lib\vs;..\..\openFrameworks\libs\videoInput\lib\vs;..\..\openFrameworks\libs\fmodex\lib\vs;..\..\openFrameworks\libs\quicktime\lib\vs;..\..\openFrameworks\libs\freetype\lib\vs;..\..\openFrameworks\libs\FreeImage\lib\vs;..\..\openFrameworks\libs\glfw\lib\vs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /e /i /y "$(ProjectDir)..\..\openFrameworks\export\vs\*.dll" "$(ProjectDir)bin"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
