@@ -1,5 +1,19 @@
 #include "ofApp.h"
 
+TrackingState trackingStateFromOscTrackingStateName(string trackingStateName) {
+	const int trackingStateCount = 3;
+	const string trackingStateNames[] = {
+		"untracked",
+		"inferred",
+		"tracked"
+	};
+
+	for (int i = 0; i < trackingStateCount; i++) {
+		if (trackingStateNames[i] == trackingStateName) {
+			return (TrackingState)i;
+		}
+	}
+}
 
 
 JointType jointTypeFromOscJointName(string jointName) {
@@ -63,10 +77,8 @@ void ofApp::update(){
 	updateCalls++;
 	ofxOscMessage m;
 
-
-
 	if (oscReceiver.hasWaitingMessages()) {
-		//ofLog(OF_LOG_VERBOSE, "-------- messages available ---------");
+		ofLog(OF_LOG_VERBOSE, "-------- messages available ---------");
 		int messagesInUpdate = 0;
 		while (oscReceiver.getNextMessage(&m)) {
 			messagesReceived++;
@@ -108,7 +120,11 @@ void ofApp::update(){
 
 				//	map<JointType, Kv2Joint> joints;
 
-				if (addressComponents[2] == "joints") {
+				// Check for tracking
+				if (addressComponents[2] == "tracked") {
+					skeletons[skeletonIndex].tracked = (m.getArgAsString(0) == "yes");
+				}
+				else if (addressComponents[2] == "joints") {
 					// Joint name
 
 					Kv2Joint joint;
@@ -133,22 +149,62 @@ void ofApp::update(){
 						joint.Position.Y = m.getArgAsFloat(1);
 						joint.Position.Z = m.getArgAsFloat(2);
 
-							// tracking state from existing object
-							joint.TrackingState = TrackingState_Tracked; // TODO
+						// tracking state from existing object
+						joint.TrackingState = existingJoint.getTrackingState();
 
-							skeletons[skeletonIndex].joints[jointType] = Kv2Joint(joint, orientation);
+						// Update the skeleton
+						skeletons[skeletonIndex].joints[jointType] = Kv2Joint(joint, orientation);
 					}
 					else if (addressComponents[4] == "orientation") {
+						// Orientation from args
+						_JointOrientation orientation;
+						orientation.JointType = jointType;
+						orientation.Orientation.x = m.getArgAsFloat(0);
+						orientation.Orientation.y = m.getArgAsFloat(1);
+						orientation.Orientation.z = m.getArgAsFloat(2);
+						orientation.Orientation.w = m.getArgAsFloat(3);
 
+						// Joint from existing object
+						_Joint joint;
+						joint.JointType = jointType;
+						joint.Position.X = existingJoint.getPosition().x;
+						joint.Position.Y = existingJoint.getPosition().y;
+						joint.Position.Z = existingJoint.getPosition().z;
+
+						// tracking state from existing object
+						joint.TrackingState = existingJoint.getTrackingState();
+
+						// Update the skeleton
+						skeletons[skeletonIndex].joints[jointType] = Kv2Joint(joint, orientation);
 					}
 					else if (addressComponents[4] == "tracking") {
+						// Use existing orientation
+						_JointOrientation orientation;
+						orientation.JointType = jointType;
+						orientation.Orientation.x = existingJoint.getOrientation().asVec4().x;
+						orientation.Orientation.y = existingJoint.getOrientation().asVec4().y;
+						orientation.Orientation.z = existingJoint.getOrientation().asVec4().z;
+						orientation.Orientation.w = existingJoint.getOrientation().asVec4().w;
 
+						// Joint from existing object
+						_Joint joint;
+						joint.JointType = jointType;
+						joint.Position.X = existingJoint.getPosition().x;
+						joint.Position.Y = existingJoint.getPosition().y;
+						joint.Position.Z = existingJoint.getPosition().z;
 
+						// tracking state from existing object
+						joint.TrackingState = trackingStateFromOscTrackingStateName(m.getArgAsString(0));
+
+						// Update the skeleton
+						skeletons[skeletonIndex].joints[jointType] = Kv2Joint(joint, orientation);
 					}
-
 				}
 
-
+				// TODO
+				// Hands
+				// Face / emotion
+				// Identity
 			}
 
 			/*
@@ -164,12 +220,11 @@ void ofApp::update(){
 		}
 
 
-		//ofLog(OF_LOG_VERBOSE, "messages received: " + ofToString(messagesReceived));
+		ofLog(OF_LOG_VERBOSE, "messages received: " + ofToString(messagesReceived));
 		//ofLog(OF_LOG_VERBOSE, "messages in update: " + ofToString(messagesInUpdate));
 		//ofLog(OF_LOG_VERBOSE, "update calls: " + ofToString(updateCalls));
 
 	}
-
 }
 
 //--------------------------------------------------------------
@@ -189,17 +244,32 @@ void ofApp::draw(){
 
 	 for (vector<Kv2Skeleton>::iterator it = skeletons.begin(); it != skeletons.end(); it++) {
 		Kv2Skeleton skeleton = *it;
-
-		//if (skeleton.tracked) {
+		
+		if (skeleton.tracked) {
 
 		for (map<JointType, Kv2Joint>::iterator it = skeleton.joints.begin(); it != skeleton.joints.end(); it++) {
 			Kv2Joint joint = it->second;
-			ofSetColor(0);
+
+			switch (joint.getTrackingState()) {
+			case TrackingState_Tracked:
+				ofSetColor(ofColor::green);
+				break;
+			case TrackingState_Inferred:
+				ofSetColor(ofColor::yellow);
+				break;
+			case TrackingState_NotTracked:
+				ofSetColor(ofColor::red);
+				break;
+			}
+
 			ofFill();
-			ofCircle(joint.getPosition().x, joint.getPosition().y, .1);
+
+			//ofLog(OF_LOG_VERBOSE, ofToString(joint.getPosition().length()));
+
+			ofCircle(joint.getPosition().x, joint.getPosition().y, .05);
 		}
 
-		//}
+		}
 	}
 
 	 ofPopMatrix();

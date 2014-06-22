@@ -19,10 +19,9 @@ void testApp::setup(){
 
 	ofDisableAlphaBlending(); //Kinect alpha channel is default 0;
 
-	//sender.setup("192.168.10.113", 12345);
-	//sender.setup("192.168.10.101", 3001);
-	sender.setup("127.0.0.1", 3001);
-
+	//sender.setup("127.0.0.1", 3001);
+	//sender.setup("192.168.225.158", 8000); // Sundar
+	sender.setup("192.168.225.160", 8000); // Dalma
 }
 
 
@@ -66,59 +65,85 @@ void testApp::update() {
 #if VM_DEVELOPMENT
 	kinect.update();
 
+	const bool USE_BUNDLE = false;
+
 	// Broadcast OSC
 	if (kinect.isFrameNew()) {
-		
+		// Bundles just seem to be structural... to the receiver, they remain separate messages
+		vector<Kv2Skeleton> skeletons = kinect.getSkeletons();
+
 		// Interate through skeletons
 		ofxOscBundle skeletonsBundle; // note the plural!
 
-		// Bundles just seem to be structural... to the receiver, they remain separate messages
-		vector<Kv2Skeleton> localSkeletons = kinect.getSkeletons();
+		int skeletonIndex = 0;
+		//for (vector<Kv2Skeleton>::iterator it = skeletons.begin(); it != skeletons.end(); ++it) {
+		//	Kv2Skeleton skeleton = *it;
 
-		for (int i = 0; i < localSkeletons.size(); i++) {
-			if (localSkeletons[i].tracked) {
+		for (int i = 0; i < 6; i++) {
+			Kv2Skeleton skeleton = skeletons[skeletonIndex];
+
+			ofxOscBundle skeletonBundle;
+
+			ofxOscMessage wholeSkeletonTrackingStatusMessage;
+			wholeSkeletonTrackingStatusMessage.setAddress("/skeletons/" + ofToString(skeletonIndex) + "/tracked/"); // set next
+
+			if (skeleton.tracked) {
 				// Iterate through joints
-				ofxOscBundle skeletonBundle;
+				wholeSkeletonTrackingStatusMessage.addStringArg("yes");
+				USE_BUNDLE ? skeletonBundle.addMessage(wholeSkeletonTrackingStatusMessage) : sender.sendMessage(wholeSkeletonTrackingStatusMessage);
+				messagesSent++;
+
+				//for (map<JointType, Kv2Joint>::iterator it = skeleton.joints.begin(); it != skeleton.joints.end(); ++it) {
+				//	JointType jointType = it->first;
+				//	Kv2Joint joint = it->second;
 
 				for (int j = 0; j < 26; j++) {
 					JointType jointType = (JointType)j;
-					Kv2Joint joint = localSkeletons[i].joints[jointType];
-					/*
-				for (map<JointType, Kv2Joint>::iterator it = localSkeletons[i].joints.begin(); it != localSkeletons[i].joints.end(); ++it) {
-					// Skeleton index
-					JointType jointType = it->first;
-					Kv2Joint joint = it->second;
-					*/
-					// Get position and rotation
+					Kv2Joint joint = skeleton.joints[jointType];
+
+					// Get position
 					ofxOscMessage jointPositionMessage;
-					jointPositionMessage.setAddress("/skeletons/" + ofToString(i) + "/joints/" + jointNames[jointType] + "/position"); // position is X Y Z
+					jointPositionMessage.setAddress("/skeletons/" + ofToString(skeletonIndex) + "/joints/" + jointNames[jointType] + "/position"); // position is X Y Z
 					jointPositionMessage.addFloatArg(joint.getPosition().x);
 					jointPositionMessage.addFloatArg(joint.getPosition().y);
 					jointPositionMessage.addFloatArg(joint.getPosition().z);
-					skeletonBundle.addMessage(jointPositionMessage);
+					USE_BUNDLE ? skeletonBundle.addMessage(jointPositionMessage) : sender.sendMessage(jointPositionMessage);
 					messagesSent++;
 
+					// Get orientation
 					ofxOscMessage jointOrientationMessage;
-					jointOrientationMessage.setAddress("/skeletons/" + ofToString(i) + "/joints/" + jointNames[jointType] + "/orientation"); // quaternion is X Y Z W
+					jointOrientationMessage.setAddress("/skeletons/" + ofToString(skeletonIndex) + "/joints/" + jointNames[jointType] + "/orientation"); // quaternion is X Y Z W
 					jointOrientationMessage.addFloatArg(joint.getOrientation().asVec4().x);
 					jointOrientationMessage.addFloatArg(joint.getOrientation().asVec4().y);
 					jointOrientationMessage.addFloatArg(joint.getOrientation().asVec4().z);
 					jointOrientationMessage.addFloatArg(joint.getOrientation().asVec4().w);
-					skeletonBundle.addMessage(jointOrientationMessage);
+					USE_BUNDLE ? skeletonBundle.addMessage(jointOrientationMessage) : sender.sendMessage(jointOrientationMessage);
 					messagesSent++;
 
-					//ofxOscMessage jointTrackingStateMessage;
-					//jointTrackingStateMessage.setAddress("/skeletons/" + ofToString(i) + "/joints/" + jointNames[jointType] + "/tracking"); // string state
-					//jointTrackingStateMessage.addStringArg(trackingStateNames[joint.getTrackingState()]);
-					//skeletonBundle.addMessage(jointTrackingStateMessage);
+					ofxOscMessage jointTrackingStateMessage;
+					jointTrackingStateMessage.setAddress("/skeletons/" + ofToString(skeletonIndex) + "/joints/" + jointNames[jointType] + "/tracking"); // string state
+					
+					// validation to sidestep some issues here with bogus tracking stats... 
+					int trackingState = ofClamp(joint.getTrackingState(), 0, 3);
+					jointTrackingStateMessage.addStringArg(trackingStateNames[trackingState]);
+					USE_BUNDLE ? skeletonBundle.addMessage(jointTrackingStateMessage) : sender.sendMessage(jointTrackingStateMessage);
+					messagesSent++;
 				}
-				
-				skeletonsBundle.addBundle(skeletonBundle);
+				if (USE_BUNDLE) skeletonsBundle.addBundle(skeletonBundle);
 			}
+			else{
+				// Not tracked!
+				wholeSkeletonTrackingStatusMessage.addStringArg("no");
+				USE_BUNDLE ? skeletonBundle.addMessage(wholeSkeletonTrackingStatusMessage) : sender.sendMessage(wholeSkeletonTrackingStatusMessage);
+				messagesSent++;
+			}
+			skeletonIndex++;
 		}
-
-
-		sender.sendBundle(skeletonsBundle);
+		//ofLog(OF_LOG_VERBOSE, "--- preparing to send ---");
+		//ofLog(OF_LOG_VERBOSE, "bundles in skeletons bundle: " + ofToString(skeletonsBundle.getBundleCount()));
+		//ofLog(OF_LOG_VERBOSE, "messages in skeletons bundle: " + ofToString(skeletonsBundle.getMessageCount()));
+		
+		if (USE_BUNDLE) sender.sendBundle(skeletonsBundle);
 	}
 #endif		
 
@@ -150,6 +175,22 @@ void testApp::keyPressed(int key){
 		m.addFloatArg(ofGetElapsedTimef());
 		sender.sendMessage(m);
 		messagesSent++;
+	}
+	else if (key == 'b' || key == 'B'){
+		ofLog(OF_LOG_NOTICE, "Sending OSC bundle test message");
+		ofxOscBundle bundle;
+
+		ofxOscMessage m;
+		m.setAddress("/test");
+		m.addIntArg(1);
+		m.addFloatArg(3.5f);
+		m.addStringArg("hello");
+		m.addFloatArg(ofGetElapsedTimef());
+
+		bundle.addMessage(m);
+		messagesSent++;
+
+		sender.sendBundle(bundle);
 	}
 }
 
