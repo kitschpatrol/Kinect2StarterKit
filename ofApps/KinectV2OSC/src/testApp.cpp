@@ -21,7 +21,9 @@ void testApp::setup(){
 
 	//sender.setup("127.0.0.1", 3001);
 	//sender.setup("192.168.225.158", 8000); // Sundar
-	sender.setup("192.168.225.160", 8000); // Dalma
+	//sender.setup("192.168.225.160", 8000); // Dalma
+	sender.setup("192.168.225.164", 8000); // Alex
+
 }
 
 
@@ -158,7 +160,7 @@ void testApp::draw() {
 #if VM_DEVELOPMENT
 	kinect.draw(0,0);
 	kinect.drawDepth(0, 0);
-	kinect.drawBodyIndex(500, 0);
+	//kinect.drawBodyIndex(500, 0);
 	kinect.drawAllSkeletons(ofVec2f(640,480));
 #endif
 }

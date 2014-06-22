@@ -225,12 +225,23 @@ void ofApp::update(){
 		//ofLog(OF_LOG_VERBOSE, "update calls: " + ofToString(updateCalls));
 
 	}
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-	ofBackground(200);
+
+	for (int i = 0; i < 6; i++) {
+		
+		if ((skeletons[i].tracked) && (skeletons[i].joints[JointType_HandTipLeft].getPosition().y > skeletons[i].joints[JointType_Head].getPosition().y)) {
+			ofBackground(0);
+		}
+		else {
+			ofBackground(200);
+		}
+
+	}
 
 	ofPushStyle();
 
