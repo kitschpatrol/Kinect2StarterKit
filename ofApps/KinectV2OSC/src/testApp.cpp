@@ -22,7 +22,7 @@ void testApp::setup(){
 	//sender.setup("127.0.0.1", 3001);
 	//sender.setup("192.168.225.158", 8000); // Sundar
 	//sender.setup("192.168.225.160", 8000); // Dalma
-	sender.setup("192.168.225.164", 8000); // Alex
+	//sender.setup("192.168.225.164", 8000); // Alex
 
 }
 
@@ -32,6 +32,16 @@ const string trackingStateNames[] = {
 	"inferred",
 	"tracked"
 };
+
+
+const string handStateNames[] = {
+	"unknown"
+	"nottracked"
+	"open"
+	"closed"
+	"lasso"
+};
+
 
 const string jointNames[] = {
 	"spinebase",
@@ -93,6 +103,20 @@ void testApp::update() {
 				// Iterate through joints
 				wholeSkeletonTrackingStatusMessage.addStringArg("yes");
 				USE_BUNDLE ? skeletonBundle.addMessage(wholeSkeletonTrackingStatusMessage) : sender.sendMessage(wholeSkeletonTrackingStatusMessage);
+				messagesSent++;
+
+				// Hands
+				// Get hand state
+				ofxOscMessage leftHandStateMessage;
+				leftHandStateMessage.setAddress("/skeletons/" + ofToString(skeletonIndex) + "/hands/left/");
+				leftHandStateMessage.addStringArg(handStateNames[skeleton.leftHandState]);
+				USE_BUNDLE ? skeletonBundle.addMessage(leftHandStateMessage) : sender.sendMessage(leftHandStateMessage);
+				messagesSent++;
+
+				ofxOscMessage rightHandStateMessage;
+				rightHandStateMessage.setAddress("/skeletons/" + ofToString(skeletonIndex) + "/hands/right/");
+				rightHandStateMessage.addStringArg(handStateNames[skeleton.rightHandState]);
+				USE_BUNDLE ? skeletonBundle.addMessage(rightHandStateMessage) : sender.sendMessage(rightHandStateMessage);
 				messagesSent++;
 
 				//for (map<JointType, Kv2Joint>::iterator it = skeleton.joints.begin(); it != skeleton.joints.end(); ++it) {

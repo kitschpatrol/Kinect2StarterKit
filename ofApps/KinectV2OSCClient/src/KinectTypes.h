@@ -3,6 +3,21 @@
 // Extract some stuff from Kinect.h...
 // Todo figure out a better way to do this witout too much dependency bulk
 
+#ifndef _HandState_
+#define _HandState_
+typedef enum _HandState HandState;
+
+
+enum _HandState
+{
+	HandState_Unknown = 0,
+	HandState_NotTracked = 1,
+	HandState_Open = 2,
+	HandState_Closed = 3,
+	HandState_Lasso = 4
+};
+#endif // _HandState_
+
 #ifndef _JointType_
 #define _JointType_
 typedef enum _JointType JointType;
@@ -159,5 +174,7 @@ class Kv2Skeleton
 {
 public:
 	bool tracked;
+	HandState leftHandState;
+	HandState rightHandState;
 	map<JointType, Kv2Joint> joints;
 };

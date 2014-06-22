@@ -1,5 +1,6 @@
 #include "ofApp.h"
 
+
 TrackingState trackingStateFromOscTrackingStateName(string trackingStateName) {
 	const int trackingStateCount = 3;
 	const string trackingStateNames[] = {
@@ -15,6 +16,23 @@ TrackingState trackingStateFromOscTrackingStateName(string trackingStateName) {
 	}
 }
 
+
+HandState handStateFromOscHandStateName(string handStateName) {
+	const int handStateCount = 26;
+	const string handStateNames[] = {
+		"unknown"
+		"nottracked"
+		"open"
+		"closed"
+		"lasso"
+	};
+
+	for (int i = 0; i < handStateCount; i++) {
+		if (handStateNames[i] == handStateName) {
+			return (HandState)i;
+		}
+	}
+}
 
 JointType jointTypeFromOscJointName(string jointName) {
 	const int oscJointCount = 26;
@@ -64,6 +82,7 @@ void ofApp::setup(){
 	const int port = 3001;
 	oscReceiver.setup(port);
 	skeletons.resize(6);
+	// TODO default skeleton is NO
 	ofLog(OF_LOG_VERBOSE, "Receiving OSC on port: " + ofToString(port));
 }
 
@@ -123,6 +142,14 @@ void ofApp::update(){
 				// Check for tracking
 				if (addressComponents[2] == "tracked") {
 					skeletons[skeletonIndex].tracked = (m.getArgAsString(0) == "yes");
+				}
+				if (addressComponents[2] == "hands") {
+					if (addressComponents[3] == "left") {
+						skeletons[skeletonIndex].leftHandState = handStateFromOscHandStateName(m.getArgAsString(0));
+					}
+					else if (addressComponents[3] == "right") {
+						skeletons[skeletonIndex].rightHandState = handStateFromOscHandStateName(m.getArgAsString(0));
+					}
 				}
 				else if (addressComponents[2] == "joints") {
 					// Joint name

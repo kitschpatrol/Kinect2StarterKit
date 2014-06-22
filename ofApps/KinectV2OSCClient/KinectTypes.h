@@ -3,6 +3,23 @@
 // Extract some stuff from Kinect.h...
 // Todo figure out a better way to do this witout too much dependency bulk
 
+
+#ifndef _HandState_
+#define _HandState_
+typedef enum _HandState HandState;
+
+
+enum _HandState
+{
+	HandState_Unknown = 0,
+	HandState_NotTracked = 1,
+	HandState_Open = 2,
+	HandState_Closed = 3,
+	HandState_Lasso = 4
+};
+#endif // _HandState_
+
+
 #ifndef _JointType_
 #define _JointType_
 typedef enum _JointType JointType;
@@ -38,6 +55,10 @@ enum _JointType
 	JointType_Count = (JointType_ThumbRight + 1)
 };
 #endif // _JointType_
+
+
+
+
 #ifndef _TrackingState_
 #define _TrackingState_
 typedef enum _TrackingState TrackingState;
