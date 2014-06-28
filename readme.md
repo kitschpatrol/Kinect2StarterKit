@@ -8,7 +8,7 @@
 
 1. Install Windows 8.1 (Boot Camp is fine if your Mac is endowed with USB 3. Virtual machines won't work.)
 
-2. Install [Visual Studio 2013 Express](http://www.visualstudio.com/downloads/download-visual-studio-vs#d-express-windows-desktop) (Express is free, but the the beefier editions also work fine.)
+2. Install [Visual Studio 2013 Express](http://www.visualstudio.com/downloads/download-visual-studio-vs#d-express-windows-desktop). (Express is free, but the the beefier editions also work fine.)
 
 3. Download and install [Git](http://git-scm.com/download/win). Say "no" to the fancy git-cheetah shell extension! It doesn't work correctly on Windows 8.
 
