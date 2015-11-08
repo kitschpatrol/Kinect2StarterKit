@@ -1,0 +1,83 @@
+From 901348721b5bf3129466c7f21dda33fe0d03340b Mon Sep 17 00:00:00 2001
+From: kitschpatrol <ermika@gmail.com>
+Date: Sun, 15 Jun 2014 19:40:42 -0400
+Subject: [PATCH] Prefix OSC's internal NetworkInitializer to avoid linker
+ conflict with with Poco. (Temporary.)
+
+---
+ addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h            | 6 +++---
+ addons/ofxOsc/libs/oscpack/src/ip/win32/NetworkingUtilsWin.cpp | 6 +++---
+ addons/ofxOsc/libs/oscpack/src/ip/win32/UdpSocketWin.cpp       | 4 ++--
+ 3 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h b/addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h
+index ff9f4e8..71fd4ec 100644
+--- a/addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h
++++ b/addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h
+@@ -35,10 +35,10 @@
+ // application creates multiple sockets from different threads at runtime you
+ // should instantiate one of these in main just to make sure the networking
+ // layer is initialized.
+-class NetworkInitializer{
++class OSCNetworkInitializer{
+ public:
+-    NetworkInitializer();
+-    ~NetworkInitializer();
++	OSCNetworkInitializer();
++	~OSCNetworkInitializer();
+ };
+ 
+ 
+diff --git a/addons/ofxOsc/libs/oscpack/src/ip/win32/NetworkingUtilsWin.cpp b/addons/ofxOsc/libs/oscpack/src/ip/win32/NetworkingUtilsWin.cpp
+index 7e8572a..53a5826 100644
+--- a/addons/ofxOsc/libs/oscpack/src/ip/win32/NetworkingUtilsWin.cpp
++++ b/addons/ofxOsc/libs/oscpack/src/ip/win32/NetworkingUtilsWin.cpp
+@@ -39,7 +39,7 @@
+ static LONG initCount_ = 0;
+ static bool winsockInitialized_ = false;
+ 
+-NetworkInitializer::NetworkInitializer()
++OSCNetworkInitializer::OSCNetworkInitializer()
+ {
+     if( InterlockedIncrement( &initCount_ ) == 1 ){
+         // there is a race condition here if one thread tries to access
+@@ -61,7 +61,7 @@ NetworkInitializer::NetworkInitializer()
+ }
+ 
+ 
+-NetworkInitializer::~NetworkInitializer()
++OSCNetworkInitializer::~OSCNetworkInitializer()
+ {
+     if( InterlockedDecrement( &initCount_ ) == 0 ){
+         if( winsockInitialized_ ){
+@@ -74,7 +74,7 @@ NetworkInitializer::~NetworkInitializer()
+ 
+ unsigned long GetHostByName( const char *name )
+ {
+-    NetworkInitializer networkInitializer;
++	OSCNetworkInitializer networkInitializer;
+ 
+     unsigned long result = 0;
+ 
+diff --git a/addons/ofxOsc/libs/oscpack/src/ip/win32/UdpSocketWin.cpp b/addons/ofxOsc/libs/oscpack/src/ip/win32/UdpSocketWin.cpp
+index 943e9a3..6d87041 100644
+--- a/addons/ofxOsc/libs/oscpack/src/ip/win32/UdpSocketWin.cpp
++++ b/addons/ofxOsc/libs/oscpack/src/ip/win32/UdpSocketWin.cpp
+@@ -82,7 +82,7 @@ static IpEndpointName IpEndpointNameFromSockaddr( const struct sockaddr_in& sock
+ 
+ 
+ class UdpSocket::Implementation{
+-    NetworkInitializer networkInitializer_;
++	OSCNetworkInitializer networkInitializer_;
+ 
+ 	bool isBound_;
+ 	bool isConnected_;
+@@ -301,7 +301,7 @@ extern "C" /*static*/ void InterruptSignalHandler( int );
+ 
+ 
+ class SocketReceiveMultiplexer::Implementation{
+-    NetworkInitializer networkInitializer_;
++	OSCNetworkInitializer networkInitializer_;
+ 
+ 	std::vector< std::pair< PacketListener*, UdpSocket* > > socketListeners_;
+ 	std::vector< AttachedTimerListener > timerListeners_;

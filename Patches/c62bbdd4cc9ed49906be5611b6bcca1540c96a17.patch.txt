@@ -1,0 +1,22 @@
+From c62bbdd4cc9ed49906be5611b6bcca1540c96a17 Mon Sep 17 00:00:00 2001
+From: kitschpatrol <ermika@gmail.com>
+Date: Sun, 15 Jun 2014 03:31:01 -0400
+Subject: [PATCH] Suppress Poco compilation error.
+
+---
+ libs/poco/include/Poco/UnWindows.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libs/poco/include/Poco/UnWindows.h b/libs/poco/include/Poco/UnWindows.h
+index 697ca0a..72e4ddc 100644
+--- a/libs/poco/include/Poco/UnWindows.h
++++ b/libs/poco/include/Poco/UnWindows.h
+@@ -68,7 +68,7 @@
+ 
+ 
+ #if defined(_WIN32_WINNT) && (_WIN32_WINNT < 0x0501)
+-	#error Unsupported Windows version.
++	//#error Unsupported Windows version.
+ #elif !defined(_WIN32_WINNT)
+ 	// define minimum supported
+ 	#define _WIN32_WINNT 0x0501

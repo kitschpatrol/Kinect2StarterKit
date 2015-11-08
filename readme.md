@@ -2,7 +2,13 @@
 
 **This kit aligns various stars for your convenience. It aggregates the dependencies and patches required to get the Kinect 2 sensor running in openFrameworks.**
 
+-----
 
+**November 2015 Notes:**
+
+*I needed to delete and recreate my openFrameworks fork on github, which might have broken this repo. I've pointed the [submodule to the closest commit](https://github.com/liquidzym/openFrameworks/commit/fa04d0c3cb64f363a8e817509648353ef8758bbf) and included two patch files in /Patches to bring the openFrameworks fork associated with this repo into the correct state. I'm not even sure the fork is necessary anymore. I have yet to revise this project for OF 9.0 and VS2015, but it seems less necessary now that the Kinect 2 is better supported and there's less fuss involved in getting everything working. If anyone still feels this repo is useful then let me know and I'll make time for an update.*
+
+-----
 
 ###Getting Started
 
